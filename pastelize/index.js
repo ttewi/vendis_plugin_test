@@ -15,9 +15,9 @@
 
         // h:872,s:385,l:63
         //! h:755, s:251, l:2
-        let a=satmin+(satmax-satmin)*(math.floor(hash/251%101)/100)  ,
-            t=lightmin+(lightmax-lightmin)*(math.floor(hash/2%101)/100)
-        const n = math.floor(hash/755%360), // 152
+        let a=satmin+(satmax-satmin)*(Math.floor(hash/251%101)/100)  ,
+            t=lightmin+(lightmax-lightmin)*(Math.floor(hash/2%101)/100)
+        const n = Math.floor(hash/755%360), // 152
             l = o.chroma.hsl(n, a, t);
         return o.ReactNative.processColor(l.toString())
     }
