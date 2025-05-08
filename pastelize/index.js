@@ -3,9 +3,21 @@
     const k = c.findByName("MurmurHashV3");
 
     function d(e) {
+        /*
         let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : .9, // .75  1.0
-            t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : .75; // .6  .8
-        const n = k(e)/872%360, // 152
+            t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : .75; // .6  0.8
+        */
+
+        let hash=k(e)
+
+        let satmin=0.85, satmax=1.0 ,
+            lightmin=0.65, lightmax=0.9
+
+        // h:872,s:385,l:63
+        //! h:755, s:251, l:2
+        let a=satmin+(satmax-satmin)*(math.floor(hash/251%101)/100)  ,
+            t=lightmin+(lightmax-lightmin)*(math.floor(hash/2%101)/100)
+        const n = math.floor(hash/755%360), // 152
             l = o.chroma.hsl(n, a, t);
         return o.ReactNative.processColor(l.toString())
     }
@@ -71,7 +83,7 @@
             if (t.type == "mention" && t.userId != null && t.colorString == null) {
                 const n = b.getMember(a, t.userId);
                 if (a != null && n == null) return;
-                const l = w.int2hex(d(t.userId, 1.0, .8)),
+                const l = w.int2hex(d(t.userId)), // d(t.userId, 1.0, .8)
                     u = w.hex2int(l);
                 t.roleColor = u, t.color = u, t.colorString = l
             } else Array.isArray(t.content) && p(t.content, a)
@@ -87,7 +99,7 @@
         if (a?.webhookId != null ? l ? s = e.username : s = a.webhookId : (!(a?.colorString ?? e.roleColor) && !n || n) && (s = e.authorId), s) {
             const m = d(s);
             if (e.roleColor = m, e.usernameColor = m, e.colorString = m, u && e.content) {
-                const M = d(s, 1.0, .8);
+                const M = d(s); // d(s, 1.0, .8)
                 e.content = [{
                     content: e.content,
                     type: "link",
