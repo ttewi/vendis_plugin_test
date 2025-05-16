@@ -23,11 +23,21 @@
         return o.ReactNative.processColor(l.toString())
         */
 
-        let hash=k(e),colordata=[[0.85,1.0,251],[0.65,0.9,2]],color=[]
+        const override={
+            920925042580287498:[186,0.85,0.71] // yeon
+        }
 
-        color.push(Math.floor(hash/755%360)) // 755
-        color.push(0.85+(1.0-0.85)*(Math.floor(hash/251%101)/100))
-        color.push(0.65+(0.9-0.65)*(Math.floor(hash/2%101)/100))
+
+        let color=override[e]??(()=>{
+            let hash=k(e),f=[] //,colordata=[[0.85,1.0,251],[0.65,0.9,2]]
+            f.push(Math.floor(hash/755%360)) // 755
+            f.push(0.85+(1.0-0.85)*(Math.floor(hash/251%101)/100))
+            f.push(0.65+(0.9-0.65)*(Math.floor(hash/2%101)/100))
+            return f
+        })()
+
+
+
 
 
         return o.ReactNative.processColor(o.chroma.hsl(...color).toString())
