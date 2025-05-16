@@ -28,7 +28,7 @@
         color.push(Math.floor(hash/755%360)) // 755
 
         for (let [a,b] in colordata) {
-            let min=b[1],max=b[2],offset=b[3]
+            let min=b[0],max=b[1],offset=b[2]
             color.push(
                 min+(max-min)*(Math.floor(hash/offset%101)/100)
             )
