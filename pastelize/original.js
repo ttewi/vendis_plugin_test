@@ -3,41 +3,11 @@
     const k = c.findByName("MurmurHashV3");
 
     function d(e) {
-        /*
-        let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : .9, // .75  1.0
-            t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : .75; // .6  0.8
-        */
-
-        /*
-        let hash=k(e)
-
-        let satmin=0.85, satmax=1.0 ,
-            lightmin=0.65, lightmax=0.9
-
-        // h:872,s:385,l:63
-        //! h:755, s:251, l:2
-        let a=satmin+(satmax-satmin)*(Math.floor(hash/251%101)/100)  ,
-            t=lightmin+(lightmax-lightmin)*(Math.floor(hash/2%101)/100)
-        const n = Math.floor(hash/755%360), // 152
+        let a = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : .75,
+            t = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : .6;
+        const n = k(e) % 360,
             l = o.chroma.hsl(n, a, t);
         return o.ReactNative.processColor(l.toString())
-        */
-
-        let hash=k(e),colordata=[[0.85,1.0,251],[0.65,0.9,2]],color=[]
-
-        color.push(Math.floor(hash/755%360)) // 755
-
-        for (let [a,b] in colordata) {
-            let min=b[1],max=b[2],offset=b[3]
-            color.push(
-                min+(max-min)*(Math.floor(hash/offset%101)/100)
-            )
-        }
-
-        return o.ReactNative.processColor(o.chroma.hsl(...color).toString())
-
-
-
     }
     const {
         ScrollView: z
@@ -101,7 +71,7 @@
             if (t.type == "mention" && t.userId != null && t.colorString == null) {
                 const n = b.getMember(a, t.userId);
                 if (a != null && n == null) return;
-                const l = w.int2hex(d(t.userId)), // d(t.userId, 1.0, .8)
+                const l = w.int2hex(d(t.userId, .85, .75)),
                     u = w.hex2int(l);
                 t.roleColor = u, t.color = u, t.colorString = l
             } else Array.isArray(t.content) && p(t.content, a)
@@ -117,7 +87,7 @@
         if (a?.webhookId != null ? l ? s = e.username : s = a.webhookId : (!(a?.colorString ?? e.roleColor) && !n || n) && (s = e.authorId), s) {
             const m = d(s);
             if (e.roleColor = m, e.usernameColor = m, e.colorString = m, u && e.content) {
-                const M = d(s); // d(s, 1.0, .8)
+                const M = d(s, .85, .75);
                 e.content = [{
                     content: e.content,
                     type: "link",
