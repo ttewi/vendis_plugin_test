@@ -24,11 +24,11 @@
         */
 
         const override={
-            920925042580287498:[186,0.85,0.71] // yeon
+            '920925042580287498':[186,0.85,0.71] // yeon
         }
 
 
-        let color=override[e]??(()=>{
+        let color=override[e.toString()]??(()=>{
             let hash=k(e),f=[] //,colordata=[[0.85,1.0,251],[0.65,0.9,2]]
             f.push(Math.floor(hash/755%360)) // 755
             f.push(0.85+(1.0-0.85)*(Math.floor(hash/251%101)/100))
