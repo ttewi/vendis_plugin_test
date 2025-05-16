@@ -26,13 +26,9 @@
         let hash=k(e),colordata=[[0.85,1.0,251],[0.65,0.9,2]],color=[]
 
         color.push(Math.floor(hash/755%360)) // 755
+        color.push(0.85+(1.0-0.85)*(Math.floor(hash/251%101)/100))
+        color.push(0.65+(0.9-0.65)*(Math.floor(hash/2%101)/100))
 
-        for (let [a,b] in colordata) {
-            let min=b[0],max=b[1],offset=b[2]
-            color.push(
-                min+(max-min)*(Math.floor(hash/offset%101)/100)
-            )
-        }
 
         return o.ReactNative.processColor(o.chroma.hsl(...color).toString())
 
