@@ -36,13 +36,7 @@
             return f
         })()
 
-
-
-
-
         return o.ReactNative.processColor(o.chroma.hsl(...color).toString())
-
-
 
     }
     const {
@@ -120,7 +114,7 @@
             l = r.storage.webhookName ?? !0,
             u = r.storage.pastelizeContent ?? !1;
         let s;
-        if (a?.webhookId != null ? l ? s = e.username : s = a.webhookId : (!(a?.colorString ?? e.roleColor) && !n || n) && (s = e.authorId), s) {
+        if ((e?.bot==true)?(s=e.username):(a?.webhookId != null ? l ? s = e.username : s = a.webhookId : (!(a?.colorString ?? e.roleColor) && !n || n) && (s = e.authorId), s)) {
             const m = d(s);
             if (e.roleColor = m, e.usernameColor = m, e.colorString = m, u && e.content) {
                 const M = d(s); // d(s, 1.0, .8)
