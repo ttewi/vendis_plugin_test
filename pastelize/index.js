@@ -141,6 +141,8 @@
                 let [t] = e, {
                     message: n
                 } = a;
+                if (n===null)
+                    return
                 t.rowType === 1 && (n.shouldShowRoleOnName = !0, I(n, t.message), n.referencedMessage?.message && I(n.referencedMessage.message, null))
             })
         },
